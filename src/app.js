@@ -62,6 +62,40 @@ app.get('/students/:id',async(req,res)=>{
     } 
 })
 
+// update student data
+app.patch('/students/:id',async(req,res)=>{
+    try{
+        // const student=await Student.updateOne({_id:req.params.id},{$set:req.body})
+        const student=await Student.findByIdAndUpdate(req.params.id,req.body,{new:true})
+        if(!student){
+            return res.status(404).send();
+        }else{
+            
+        res.status(200).send(student)
+        }    
+    }
+    catch(e){
+        res.status(400).send(e)
+    } 
+})
+
+// delete student data
+app.delete('/students/:id',async(req,res)=>{
+    try{
+        // const student=await Student.deleteOne({_id:req.params.id},{$set:req.body})
+        const student=await Student.findByIdAndDelete(req.params.id,{new:true})
+        if(!student){
+            return res.status(404).send({"err":"student not found"});
+        }else{
+            
+        res.status(301).json({"msg":"deleted successfullyt"})
+        }    
+    }
+    catch(e){
+        res.status(400).send(e)
+    } 
+})
+
 
 
 app.listen(3000,()=>{
