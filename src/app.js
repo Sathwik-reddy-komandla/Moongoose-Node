@@ -19,18 +19,6 @@ app.post('/students',(req,res)=>{
 })
 
 
-//get all students
-// Create new students
-app.get('/students',(req,res)=>{
-    student.save().then(()=>{
-        console.log("obj created")
-        res.status(201).send(student)
-    }).catch((err)=>{
-        console.log(err)
-        res.status(500).send(err)
-    })
-})
-
 app.listen(3000,()=>{
     console.log("Listening at port 3000")
 })
